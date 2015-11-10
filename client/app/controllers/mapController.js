@@ -1,22 +1,21 @@
 angular.module('whereTo.map', [])
 
-  .controller('MapController', function($scope, $state, $stateParams, $firebaseObject){
+  .controller('MapController', function($scope, $state, $stateParams){
     var fbRef = new Firebase("https://where-to-next.firebaseio.com");
 
     var userRef = new Firebase("https://where-to-next.firebaseio.com/users");
 
-    
     //check if user is authorized, if not redirect to login
     var authData = fbRef.getAuth();
 
     $scope.fetchMarkers = function() {
-      console.log('hello world')
 
       userRef.child(authData.uid).on("value", function(snapshot) {
         var places = snapshot.val().whereToList;
         console.log(places)
 
         for(var key in places) {
+          console.log(places[key])
           $scope.pinMap(places[key]);
         }
 
@@ -24,6 +23,7 @@ angular.module('whereTo.map', [])
         console.log("The read failed: " + errorObject.code);
       });
     }
+
 
 //******************************************************//
         //**************** MAP ******************//   
@@ -89,11 +89,10 @@ angular.module('whereTo.map', [])
 //******************************************************//   
 //******************************************************//    
     $scope.pinMap = function(location) {
-      var geocoder = new google.maps.Geocoder;
+      var geocoder = new google.maps.Geocoder();
 
       geocoder.geocode({address: location}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-        var coordinates = results[0].geometry.location
         
         var marker = new google.maps.Marker({
             map: map,
@@ -108,7 +107,7 @@ angular.module('whereTo.map', [])
     } else {
       $scope.fetchMarkers();
     }
-
+  
     $scope.location;
 
     $scope.findLoc = function() {
@@ -126,11 +125,16 @@ angular.module('whereTo.map', [])
         //function to insert coordinates into database
         userRef.child(authData.uid).child('whereToList').push($scope.location)
 
+        // userRef.child(authData.uid).on('value', function(dataSnapshot) {
+        //    console.log('hey there')
+        //   $scope.fetchMarkers();
+        // });
+
       } else {
         alert("Geocode was not successful for the following reason: " + status);
         }
       })
+      $scope.map.location = ''
     }
- 
 
   });
