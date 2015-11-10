@@ -6,10 +6,9 @@ var methodOverride = require('method-override');
 var port  = process.env.PORT || 3000;
 var app = express();
 
-var db = require('./config/db-config')
+var db = require('server/config/db-config.js')
 
-app.use(express.static(__dirname + '/client'));
-app.use('client/lib',  express.static(__dirname + '/client/lib'));
+app.use(express.static(__dirname + 'client'));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -19,7 +18,7 @@ app.use(methodOverride());
 
 // Routes
 // ------------------------------------------------------
-require('./routes/routes.js')(app);
+require('server/routes/routes.js')(app);
 
 // Listen
 // -------------------------------------------------------
