@@ -3,3 +3,12 @@
   width: 900px;
   margin: 0 auto;
 }
+
+nav button {
+  display: inline;
+  position: relative;
+}
+
+h1 {
+  font-family: 'Comfortaa', cursive;
+}
