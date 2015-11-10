@@ -19,7 +19,7 @@ angular.module('whereTo.auth', ['firebase'])
         console.log('User unauthenticated')
       }
     }) 
-    
+
     $scope.login = function() {
       var email = $scope.user.email;
       var password = $scope.user.password;
@@ -39,10 +39,12 @@ angular.module('whereTo.auth', ['firebase'])
       checkAuth.createUser(email, password, function(error, user) {
         if (error === null) {
           console.log("User created successfully:", user);
+           $scope.login();
         } else {
           console.log("Error creating user:", error);
         }
       });
+  
     }
 
     $scope.logout = function() {

@@ -11,30 +11,33 @@ angular.module('where-to.services', [])
 
   return googleMapService;
 })
-.factory('DataService', function($http) {
-  var getLocations = function () {
-    return $http({
-      method: 'GET',
-      url: '/api/users'
-    })
-    .then(function (resp) {
-      return resp.data;
-    });
-  };
+// .factory('DataService', function($http) {
+//   var getLocations = function () {
+//     return $http({
+//       method: 'GET',
+//       url: '/api/users'
+//     })
+//     .then(function (resp) {
+//       return resp.data;
+//     });
+//   };
 
-  var addLocations = function (coordinates) {
-    return $http({
-      method: 'POST',
-      url: '/api/users',
-      data: coordinates
-    })
-    .then(function (resp) {
-      return resp.data;
-    });
-  };
+//   var addLocations = function (coordinates) {
+//     return $http({
+//       method: 'POST',
+//       url: '/api/users',
+//       data: coordinates
+//     })
+//     .then(function (resp) {
+//       return resp.data;
+//     });
+//   };
 
-  return {
-    getLocations: getLocations,
-    addLocations: addLocations
-  };    
+//   return {
+//     getLocations: getLocations,
+//     addLocations: addLocations
+//   };    
+// })
+.factory('Person', function (fbURL, $firebase) {
+  return $firebase(new Firebase("https://where-to-next.firebaseio.com")).$asArray();
 })

@@ -7,8 +7,8 @@
 <div id='login' class='text-center' ng-controller="AuthController">
     <h1>login</h1>
     <form name="loginForm" class="form-signin" ng-submit='login()'>
-        <input type='text' ng-model='user.email' class="form-control">
-        <input type="password" ng-model='user.password' class="form-control">
+        <input type='text' ng-model='user.email' class="form-control" placeholder="wanderlust@whereto.com">
+        <input type="password" ng-model='user.password' class="form-control" placeholder="password">
         <button class="btn btn-lg btn-primary btn-block">login</button>
     </form>
     <a sref="signup">Don't have an account? <strong>Signup</strong> ...</a>
