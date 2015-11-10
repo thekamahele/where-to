@@ -1,5 +1,5 @@
 angular.module('whereTo.auth', ['firebase'])
-  .controller('AuthController', ['$scope', '$state', '$stateParams', 'Profile', function($scope, $state, $stateParams, Profile){
+  .controller('AuthController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams){
     var fbRef = new Firebase("https://where-to-next.firebaseio.com");
 
     var checkAuth = new FirebaseSimpleLogin(fbRef, function(err, user) {
@@ -40,12 +40,12 @@ angular.module('whereTo.auth', ['firebase'])
         if (error === null) {
           console.log("User created successfully:", user);
            $scope.login();
-
+           //saving user info
            userRef.child(user.uid).set({
                 provider: user.provider,
-                name: user.email
+                name: user.email,
+                whereToList: []
               });
-
 
         } else {
           console.log("Error creating user:", error);

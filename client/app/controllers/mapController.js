@@ -3,14 +3,31 @@ angular.module('whereTo.map', [])
   .controller('MapController', function($scope, $state, $stateParams, $firebaseObject){
     var fbRef = new Firebase("https://where-to-next.firebaseio.com");
 
+    var userRef = new Firebase("https://where-to-next.firebaseio.com/users");
+
+    
     //check if user is authorized, if not redirect to login
     var authData = fbRef.getAuth();
 
-    if (authData === null) {
-      $state.go('login')
-    } 
+    $scope.fetchMarkers = function() {
+      console.log('hello world')
 
-    $scope.location
+      userRef.child(authData.uid).on("value", function(snapshot) {
+        var places = snapshot.val().whereToList;
+        console.log(places)
+
+        for(var key in places) {
+          $scope.pinMap(places[key]);
+        }
+
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+    }
+
+//******************************************************//
+        //**************** MAP ******************//   
+//******************************************************// 
 
     var styles = [{
         "featureType": "water",
@@ -68,22 +85,46 @@ angular.module('whereTo.map', [])
     });
 
     map.setOptions({styles: styles});
+//******************************************************//
+//******************************************************//   
+//******************************************************//    
+    $scope.pinMap = function(location) {
+      var geocoder = new google.maps.Geocoder;
 
+      geocoder.geocode({address: location}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var coordinates = results[0].geometry.location
+        
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      }
+    });
+  }
+
+    if (authData === null) {
+      $state.go('login')
+    } else {
+      $scope.fetchMarkers();
+    }
+
+    $scope.location;
 
     $scope.findLoc = function() {
       $scope.location = $scope.map.location
       //send to geocoder in mapservice
-      var geocoder = new google.maps.Geocoder;
+      var geocoder = new google.maps.Geocoder();
 
       geocoder.geocode({address: $scope.location}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-  
-        //map.setCenter(results[0].geometry.location);
+        
         var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location
         });
         //function to insert coordinates into database
+        userRef.child(authData.uid).child('whereToList').push($scope.location)
 
       } else {
         alert("Geocode was not successful for the following reason: " + status);
@@ -91,6 +132,5 @@ angular.module('whereTo.map', [])
       })
     }
  
-
 
   });
