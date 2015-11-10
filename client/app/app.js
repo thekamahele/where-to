@@ -1,4 +1,4 @@
-angular.module('whereto', ['whereTo.map', 'where-to.services', 'ui.router', 'firebase'])
+angular.module('whereto', ['whereTo.map', 'where-to.services', 'whereTo.auth', 'ui.router', 'firebase'])
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 

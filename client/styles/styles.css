@@ -13,3 +13,12 @@ body {
   padding-top: 100px; 
   font-family: 'Comfortaa', cursive;
 }
+
+#login, #signup {
+  border: 1px solid darkgray;
+  border-radius: 10px;
+  width: 500px;
+  height: 300px;
+  margin: 0 auto;
+  margin-top: 100px;
+}
