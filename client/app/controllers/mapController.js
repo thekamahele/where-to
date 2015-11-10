@@ -1,11 +1,15 @@
 angular.module('whereTo.map', [])
 
-  .controller('MapController', function($scope, $state, $stateParams, MapService){
+  .controller('MapController', function($scope, $state, $stateParams, $firebaseObject){
     var fbRef = new Firebase("https://where-to-next.firebaseio.com");
+
+    //check if user is authorized, if not redirect to login
     var authData = fbRef.getAuth();
+
     if (authData === null) {
       $state.go('login')
-    }
+    } 
+
     $scope.location
 
     var styles = [{

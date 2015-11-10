@@ -1,5 +1,5 @@
 angular.module('whereTo.auth', ['firebase'])
-  .controller('AuthController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams){
+  .controller('AuthController', ['$scope', '$state', '$stateParams', 'Profile', function($scope, $state, $stateParams, Profile){
     var fbRef = new Firebase("https://where-to-next.firebaseio.com");
 
     var checkAuth = new FirebaseSimpleLogin(fbRef, function(err, user) {
@@ -13,7 +13,7 @@ angular.module('whereTo.auth', ['firebase'])
     });
 
     fbRef.onAuth(function(authData){
-      if(authData) {
+     if(authData) {
         $state.go('map')
       } else {
         console.log('User unauthenticated')
@@ -28,18 +28,25 @@ angular.module('whereTo.auth', ['firebase'])
         email: email,
         password: password
       })
-    
     }
 
     $scope.signup = function() {
-
       var email = $scope.user.email;
       var password = $scope.user.password;
+
+      var userRef = new Firebase("https://where-to-next.firebaseio.com/users")
 
       checkAuth.createUser(email, password, function(error, user) {
         if (error === null) {
           console.log("User created successfully:", user);
            $scope.login();
+
+           userRef.child(user.uid).set({
+                provider: user.provider,
+                name: user.email
+              });
+
+
         } else {
           console.log("Error creating user:", error);
         }

@@ -38,6 +38,16 @@ angular.module('where-to.services', [])
 //     addLocations: addLocations
 //   };    
 // })
-.factory('Person', function (fbURL, $firebase) {
-  return $firebase(new Firebase("https://where-to-next.firebaseio.com")).$asArray();
-})
+.factory("Profile", ["$firebaseObject",
+  function($firebaseObject) {
+    return function(username) {
+      // create a reference to the database node where we will store our data
+  
+      var ref = new Firebase("https://where-to-next.firebaseio.com");
+      var profileRef = ref.child(username);
+
+      // return it as a synchronized object
+      return $firebaseObject(profileRef);
+    }
+  }
+]);
