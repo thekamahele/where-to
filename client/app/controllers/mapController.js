@@ -1,6 +1,11 @@
 angular.module('whereTo.map', [])
 
-  .controller('MapController', function($scope, MapService){
+  .controller('MapController', function($scope, $state, $stateParams, MapService){
+    var fbRef = new Firebase("https://where-to-next.firebaseio.com");
+    var authData = fbRef.getAuth();
+    if (authData === null) {
+      $state.go('login')
+    }
     $scope.location
 
     var styles = [{
@@ -75,7 +80,7 @@ angular.module('whereTo.map', [])
             position: results[0].geometry.location
         });
         //function to insert coordinates into database
-     
+
       } else {
         alert("Geocode was not successful for the following reason: " + status);
         }
