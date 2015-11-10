@@ -6,8 +6,8 @@ var methodOverride = require('method-override');
 var port  = process.env.PORT || 3000;
 var app = express();
 
-var db = require('./config/db-config')
-
+var db = require(__dirname + '/server/config/db-config')
+console.log('dir', __dirname + '/client')
 app.use(express.static(__dirname + '/client'));
 app.use('client/lib',  express.static(__dirname + '/client/lib'));
 app.use(morgan('dev'));
@@ -19,7 +19,7 @@ app.use(methodOverride());
 
 // Routes
 // ------------------------------------------------------
-require('./routes/routes.js')(app);
+require(__dirname + '/server/routes/routes.js')(app);
 
 // Listen
 // -------------------------------------------------------

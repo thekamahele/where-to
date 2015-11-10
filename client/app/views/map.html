@@ -1,1 +1,8 @@
-<div id="mapdisplay">MAP GOES HERE</div>
+<div ng-controller="MapController">
+  <div id="mapdisplay"></div>
+  <form name="locationForm" ng-submit="findLoc()">
+    <input type="text" ng-model="map.location">
+    <button>Mark the Map!</button>
+  </form>
+  <div>{{ location }}</div>
+</div>

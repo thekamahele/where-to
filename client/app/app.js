@@ -1,23 +1,24 @@
-angular.module('whereto', ['ui.router'])
+angular.module('whereto', ['whereTo.map', 'where-to.services', 'ui.router'])
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-    .state('login', {
-      url: '/login',
-      templateUrl: 'views/login.html',
-      controller: 'AuthController'
-    })
-    .state('signup', {
-      url: '/signup',
-      templateUrl: '/views/signup.html',
-      controller: 'AuthController'
-    })
+    // .state('login', {
+    //   url: '/login',
+    //   templateUrl: 'app/views/login.html',
+    //   controller: 'AuthController'
+    // })
+    // .state('signup', {
+    //   url: '/signup',
+    //   templateUrl: 'app/views/signup.html',
+    //   controller: 'AuthController'
+    // })
     .state('map', {
-      templateUrl: 'views/map.html',
+      url: '/map',
+      templateUrl: 'app/views/map.html',
       controller: 'MapController'
     });
 
-    $urlRouterProvider.otherwise('/links');
+    $urlRouterProvider.otherwise('/map');
 
 }])
