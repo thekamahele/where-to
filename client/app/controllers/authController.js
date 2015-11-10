@@ -12,7 +12,14 @@ angular.module('whereTo.auth', ['firebase'])
         }
     });
 
-
+    fbRef.onAuth(function(authData){
+      if(authData) {
+        $state.go('map')
+      } else {
+        console.log('User unauthenticated')
+      }
+    }) 
+    
     $scope.login = function() {
       var email = $scope.user.email;
       var password = $scope.user.password;
@@ -21,14 +28,6 @@ angular.module('whereTo.auth', ['firebase'])
         email: email,
         password: password
       })
-
-      fbRef.onAuth(function(authData){
-        if(authData) {
-          $state.go('map')
-        } else {
-          console.log('User unauthenticated')
-        }
-      }) 
     
     }
 
