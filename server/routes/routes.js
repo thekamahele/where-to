@@ -2,7 +2,6 @@
 var utils = require('../config/helpers');
 var User = require('../models/model')
 
-// app.get('/api/users')
 module.exports = function(app) {
   app.post('/api/signup', function(req, res) {
 
@@ -19,7 +18,10 @@ module.exports = function(app) {
             password: pass
           });
           // newUser.hashPassword(function (){
-            newUser.save();
+            newUser.save(function(err, results) {
+              console.log(results)
+              console.log('saved')
+            });
             // util.createSession(req, res, newUser);
           // });
         
@@ -47,6 +49,17 @@ module.exports = function(app) {
       }
     })
 
+  })
+
+  app.get('/api/users', function(req, res) {
+    console.log('user req', req)
+
+    User.findOne({ username: req.body.username }, function(err, found) {
+      if(found) {
+        console.log('found the user')
+        found.
+      }
+    })
   })
 });
 

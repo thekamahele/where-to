@@ -8,11 +8,11 @@ angular.module('whereto', ['whereTo.map', 'where-to.services', 'ui.router'])
       templateUrl: 'app/views/login.html',
       controller: 'AuthController'
     })
-    // .state('signup', {
-    //   url: '/signup',
-    //   templateUrl: 'app/views/signup.html',
-    //   controller: 'AuthController'
-    // })
+    .state('signup', {
+      url: '/signup',
+      templateUrl: 'app/views/signup.html',
+      controller: 'AuthController'
+    })
     .state('map', {
       url: '/map',
       templateUrl: 'app/views/map.html',

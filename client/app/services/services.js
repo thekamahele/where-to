@@ -8,6 +8,33 @@ angular.module('where-to.services', [])
   //           center: new google.maps.LatLng(0,0)
   //       });
   // }
-  
+
   return googleMapService;
-});
+})
+.factory('DataService', function($http) {
+  var getLocations = function () {
+    return $http({
+      method: 'GET',
+      url: '/api/users'
+    })
+    .then(function (resp) {
+      return resp.data;
+    });
+  };
+
+  var addLocations = function (coordinates) {
+    return $http({
+      method: 'POST',
+      url: '/api/users',
+      data: coordinates
+    })
+    .then(function (resp) {
+      return resp.data;
+    });
+  };
+
+  return {
+    getLocations: getLocations,
+    addLocations: addLocations
+  };    
+})

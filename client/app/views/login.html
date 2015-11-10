@@ -1,13 +1,15 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-  <h1>Where To?</h1>
-    <button ui-sref="login" class="btn btn-default pull-right">Login</button>
+    <div class="container">
+        <a class="navbar-brand" href="#/map">Where To?</a>
+        <button ui-sref="signup" class="btn btn-default navbar-right navbar-btn ">Sign Up</button>
+    </div>
 </nav>
 <div id='login' ng-controller="AuthController">
-  <h1>login</h1>
-  <form name="loginForm" ng-submit='login()'>
-    <input type='text'ng-model='user.username'>
-    <input type="password" ng-model='user.password'>
-    <button>login</button>
-  </form>
-  <a sref="signup">Don't have an account? <strong>Signup</strong> ...</a>
+    <h1>login</h1>
+    <form name="loginForm" ng-submit='login()'>
+        <input type='text' ng-model='user.username'>
+        <input type="password" ng-model='user.password'>
+        <button>login</button>
+    </form>
+    <a sref="signup">Don't have an account? <strong>Signup</strong> ...</a>
 </div>
