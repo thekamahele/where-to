@@ -1,6 +1,7 @@
 //define backend routes here
 var utils = require('../config/helpers');
-var User = require('../models/model')
+var User = require('../models/model');
+var promise = require('bluebird')
 
 module.exports = function(app) {
   app.post('/api/signup', function(req, res) {
@@ -51,16 +52,30 @@ module.exports = function(app) {
 
   })
 
-  app.get('/api/users', function(req, res) {
-    console.log('user req', req)
-
-    User.findOne({ username: req.body.username }, function(err, found) {
-      if(found) {
-        console.log('found the user')
-        found.
+  app.post('/api/users', function(req, res) {
+    console.log('user req', req.body)
+    var coordinates = [54,89]
+    User.findOneAndUpdate({ username: req.body.username }, 
+      {$push: {beenToList: coordinates}}, function(err, doc) {
+      if(err) {
+        console.error(err)
       }
+
+      console.log('updated the user', doc)
+      res.send('updating')
     })
   })
+
+  app.get('/api/users', function(req, res) {
+
+    var findOne = promise.promisify(User.findOne)
+    findOne({ username: gambino })
+      .then(function(user){
+        console.log('list', user.beenToList)
+        res.send(user.beenToList)
+      });
+
 });
 
-}
+})
+};
