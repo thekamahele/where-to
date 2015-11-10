@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="container" ng-controller="AuthController">
         <a class="navbar-brand" href="#">Where To?</a>
-        <button ui-sref="login" class="btn btn-default navbar-right navbar-btn ">Login</button>
+        <button ng-click="logout()" class="btn btn-default navbar-right navbar-btn ">Logout</button>
     </div>
 </nav>
 <div ng-controller="MapController">

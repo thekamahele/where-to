@@ -1,5 +1,5 @@
 angular.module('whereTo.auth', ['firebase'])
-  .controller('AuthController', ['$scope', function($scope){
+  .controller('AuthController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams){
     var fbRef = new Firebase("https://where-to-next.firebaseio.com");
 
     var checkAuth = new FirebaseSimpleLogin(fbRef, function(err, user) {
@@ -20,6 +20,8 @@ angular.module('whereTo.auth', ['firebase'])
         email: email,
         password: password
       })
+
+      $state.go('map')
     }
 
     $scope.signup = function() {
@@ -38,6 +40,7 @@ angular.module('whereTo.auth', ['firebase'])
 
     $scope.logout = function() {
       checkAuth.logout();
+      $state.go('login')
     }
 
   }])
