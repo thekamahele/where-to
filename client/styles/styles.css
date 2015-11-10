@@ -9,6 +9,7 @@ nav button {
   position: relative;
 }
 
-h1 {
+body { 
+  padding-top: 100px; 
   font-family: 'Comfortaa', cursive;
 }

@@ -4,9 +4,10 @@ angular.module('whereTo.map', [])
     $scope.location
 
     var map = new google.maps.Map(document.getElementById('mapdisplay'), {
-        zoom: 3,
+        zoom: 2,
         center: new google.maps.LatLng(0,0)
     });
+
 
     $scope.findLoc = function() {
       $scope.location = $scope.map.location
@@ -16,11 +17,13 @@ angular.module('whereTo.map', [])
       geocoder.geocode({address: $scope.location}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         console.log('success', results)
-        map.setCenter(results[0].geometry.location);
+        //map.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location
         });
+        //function to insert coordinates into database
+        
       } else {
         alert("Geocode was not successful for the following reason: " + status);
         }

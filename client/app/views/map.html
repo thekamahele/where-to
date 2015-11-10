@@ -1,8 +1,21 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+  <a class="navbar-brand" href="#">Where To?</a>
+    <button ui-sref="login" class="btn btn-default navbar-right navbar-btn ">Login</button>
+  </div>
+</nav>
 <div ng-controller="MapController">
   <div id="mapdisplay"></div>
-  <form name="locationForm" ng-submit="findLoc()">
-    <input type="text" ng-model="map.location">
-    <button>Mark the Map!</button>
-  </form>
-  <div>{{ location }}</div>
+<br>
+  <div class="col-md-4 col-md-offset-4">
+    <form name="locationForm" ng-submit="findLoc()">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="add a destination" ng-model="map.location">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Mark the Map!</button>
+        </span>
+      </div>
+    </form>
+  </div>
+
 </div>
