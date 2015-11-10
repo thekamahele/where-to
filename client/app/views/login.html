@@ -4,12 +4,12 @@
         <button ui-sref="signup" class="btn btn-default navbar-right navbar-btn ">Sign Up</button>
     </div>
 </nav>
-<div id='login' ng-controller="AuthController">
+<div id='login' class='text-center' ng-controller="AuthController">
     <h1>login</h1>
-    <form name="loginForm" ng-submit='login()'>
-        <input type='text' ng-model='user.username'>
-        <input type="password" ng-model='user.password'>
-        <button>login</button>
+    <form name="loginForm" class="form-signin" ng-submit='login()'>
+        <input type='text' ng-model='user.username' class="form-control">
+        <input type="password" ng-model='user.password' class="form-control">
+        <button class="btn btn-lg btn-primary btn-block">login</button>
     </form>
-    <a sref="signup">Don't have an account? <strong>Signup</strong> ...</a>
+    <a sref="signup" class="text-center">Don't have an account? <strong>Signup</strong> ...</a>
 </div>

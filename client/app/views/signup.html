@@ -4,17 +4,17 @@
     <button ui-sref="login" class="btn btn-default navbar-right navbar-btn ">Login</button>
   </div>
 </nav>
-<div id='signup'>
+<div id='signup' class='text-center'>
   <h1>signup</h1>
-  <form name="signupForm" ng-submit='signup()'>
-    <input type='text' ng-model='user.username' name='username' ng-minlength='3' ng-maxlength='15'>
-    <input type="password" ng-model='user.password' name='password' ng-minlength='7' ng-maxlength='15'>
-    <button>signup</button>
+  <form name="signupForm" class="form-signin"ng-submit='signup()'>
+    <input type='text' ng-model='user.username' name='username' ng-minlength='3' ng-maxlength='15' class="form-control">
+    <input type="password" ng-model='user.password' name='password' ng-minlength='7' ng-maxlength='15' class="form-control">
+    <button class="btn btn-lg btn-primary btn-block">signup</button>
   </form>
-  <a href="#/signin">Already have an account? <strong>Signin</strong> ...</a>
+  <a href="#/signin" class='text-center'>Already have an account? <strong>Signin</strong> ...</a>
 </div>
 
-<div class='alert'>
+<div class='alert' class='text-center'>
   <span ng-show='signupForm.username.$error.minlength'>Username too short!</span>
   <span ng-show='signupForm.username.$error.maxlength'>Username too long!</span>
   <span ng-show='signupForm.password.$error.minlength'>Password too short!</span>
