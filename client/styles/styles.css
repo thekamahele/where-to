@@ -1,10 +1,9 @@
 #mapdisplay {
-  height: 500px;
-  width: 900px;
+  height: 485px;
+  width: 1000px;
   margin: 0 auto;
-}
-nav {
-  background-color: teal;
+  margin-top: 50px;
+  border: 2px solid teal;
 }
 
 nav button {
@@ -29,11 +28,6 @@ body {
 
 .navbar-brand {
   font-size: 2.5em;
-}
-
-#mapdisplay {
-  margin-top: 60px;
-  border: 2px solid teal;
 }
 
 img {
