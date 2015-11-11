@@ -3,14 +3,13 @@ angular.module('whereTo.map', [])
   .controller('MapController', function($scope, $state, $stateParams){
     var fbRef = new Firebase("https://where-to-next.firebaseio.com");
 
-    var userRef = new Firebase("https://where-to-next.firebaseio.com/users");
+   // var userRef = new Firebase("https://where-to-next.firebaseio.com/users");
 
     //check if user is authorized, if not redirect to login
     var authData = fbRef.getAuth();
 
     $scope.fetchMarkers = function() {
-
-      userRef.child(authData.uid).on("value", function(snapshot) {
+      fbRef.child('users').child(authData.uid).once('value', function(snapshot){
         var places = snapshot.val().whereToList;
         console.log(places)
 
@@ -18,6 +17,12 @@ angular.module('whereTo.map', [])
           console.log(places[key])
           $scope.pinMap(places[key]);
         }
+
+        setTimeout(function() {
+          for(var i = 0; i < leftOut.length; i++) {
+            $scope.pinMap(leftOut[i]);
+          }
+        }, 30000)
 
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
@@ -88,16 +93,21 @@ angular.module('whereTo.map', [])
 //******************************************************//
 //******************************************************//   
 //******************************************************//    
+    var leftOut = [];
     $scope.pinMap = function(location) {
       var geocoder = new google.maps.Geocoder();
-
+      
       geocoder.geocode({address: location}, function(results, status) {
+        console.log('here',location, status, google.maps.GeocoderStatus.OK)
       if (status == google.maps.GeocoderStatus.OK) {
         
         var marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location
         });
+      } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+        leftOut.push(location);
+        console.log(leftOut)
       }
     });
   }
@@ -123,12 +133,7 @@ angular.module('whereTo.map', [])
             position: results[0].geometry.location
         });
         //function to insert coordinates into database
-        userRef.child(authData.uid).child('whereToList').push($scope.location)
-
-        // userRef.child(authData.uid).on('value', function(dataSnapshot) {
-        //    console.log('hey there')
-        //   $scope.fetchMarkers();
-        // });
+        fbRef.child('users').child(authData.uid).child('whereToList').push($scope.location)
 
       } else {
         alert("Geocode was not successful for the following reason: " + status);
