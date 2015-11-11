@@ -3,8 +3,6 @@ angular.module('whereTo.map', [])
   .controller('MapController', function($scope, $state, $stateParams){
     var fbRef = new Firebase("https://where-to-next.firebaseio.com");
 
-   // var userRef = new Firebase("https://where-to-next.firebaseio.com/users");
-
     //check if user is authorized, if not redirect to login
     var authData = fbRef.getAuth();
 
@@ -103,7 +101,8 @@ angular.module('whereTo.map', [])
         
         var marker = new google.maps.Marker({
             map: map,
-            position: results[0].geometry.location
+            position: results[0].geometry.location,
+            icon: './assets/airplane.png'
         });
       } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
         leftOut.push(location);
@@ -130,7 +129,8 @@ angular.module('whereTo.map', [])
         
         var marker = new google.maps.Marker({
             map: map,
-            position: results[0].geometry.location
+            position: results[0].geometry.location,
+            icon: './assets/airplane.png'
         });
         //function to insert coordinates into database
         fbRef.child('users').child(authData.uid).child('whereToList').push($scope.location)
