@@ -1,10 +1,12 @@
 angular.module('whereTo.map', [])
 
-.controller('MapController', function($scope, $state, $stateParams) {
-    var fbRef = new Firebase("URL HERE");
+.controller('MapController', function($scope, $state, MapService) {
+    var fbRef = new Firebase("https://where-to-next.firebaseio.com");
 
     //check if user is authorized, if not redirect to login
     var authData = fbRef.getAuth();
+
+    var map = MapService.initMap();
 
     $scope.fetchMarkers = function() {
       fbRef.child('users').child(authData.uid).once('value', function(snapshot) {
@@ -25,74 +27,7 @@ angular.module('whereTo.map', [])
       }, function(errorObject) {
           console.log("The read failed: " + errorObject.code);
       });
-    }
-
-
-    //******************************************************//
-    //**************** MAP ******************//   
-    //******************************************************// 
-
-    var styles = [{
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [{
-            "hue": "#008285"
-        }, {
-            "saturation": 100
-        }, {
-            "lightness": -66
-        }, {
-            "visibility": "on"
-        }]
-    }, {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [{
-            "hue": "#CAFCE4"
-        }, {
-            "saturation": 85
-        }, {
-            "lightness": 0
-        }, {
-            "visibility": "on"
-        }]
-    }, {
-        "featureType": "poi.park",
-        "elementType": "all",
-        "stylers": [{
-            "hue": "#61C273"
-        }, {
-            "saturation": 2
-        }, {
-            "lightness": -27
-        }, {
-            "visibility": "on"
-        }]
-    }, {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [{
-            "hue": "#B0C4C7"
-        }, {
-            "saturation": -83
-        }, {
-            "lightness": 26
-        }, {
-            "visibility": "on"
-        }]
-    }]
-
-    var map = new google.maps.Map(document.getElementById('mapdisplay'), {
-        zoom: 2,
-        center: new google.maps.LatLng(0, 0)
-    });
-
-    map.setOptions({
-        styles: styles
-    });
-    //******************************************************//
-    //******************************************************//   
-    //******************************************************//    
+    }   
 
     var leftOut = [];
     $scope.pinMap = function(location) {
