@@ -17,25 +17,18 @@ Once the project moves into development, the press release can be used as a touc
  -->
 
 
-### A visual to go list for nomads with a wanderlust struck heart
-  
-## Summary ##
-  Are you a nomadic spirit aspiring to travel the world? Where To is a tool for you to keep track of places you've been and places you'll be going. 
+### Where To - A visual to go list for nomads with a wanderlust struck heart
 
-## Problem ##
-  Tired of keeping a running post-it note or a mental list of your travel destinations? Where To provides a beautiful visual representation that is easy to use and look at!
+  Are you a nomadic spirit aspiring to travel the world? 
 
-## Solution ##
+  Tired of keeping a running post-it note or a mental list of your travel destinations? Where To is a tool that allows you to keep track of your travel bucket list, providing a beautiful visual representation that is easy to use and look at!
+
   Log-in whenever and whereever you are to add destinations to your map.
 
-## Quote from You ##
-  > A quote from a spokesperson in your company.
-
 ## How to Get Started ##
-  Simply create a free user account and begin tracking your destinations! Once you log-in, you will begin with an empty world map.
+  Simply create a free user account. Once you log-in, you will begin with an empty world map so begin pinning!
 
-## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  Don't just take our word for it, go try it for yourself at [where-to-next.firebaseapp.com]
 
-## Closing and Call to Action ##
-  Don't just take our word for it, go try it for yourself at []
+## Version 2.0
+  Where To has morphed into Yugen, a bucket list visualization and planner. Not only can you pin your destinations, but you can take a step closer by beginning to plan each of your trips all in one place! Coming soon.
