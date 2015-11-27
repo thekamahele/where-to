@@ -69,7 +69,7 @@ var initMap = function() {
 
 })
 .factory('AuthService', function($state) {
-  var fbRef = new Firebase("https://where-to-next.firebaseio.com");
+  var fbRef = new Firebase("URL HERE");
 
   var checkAuth = new FirebaseSimpleLogin(fbRef, function(err, user) {
       if (err !== null) {

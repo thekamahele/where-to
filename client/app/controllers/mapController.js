@@ -1,7 +1,7 @@
 angular.module('whereTo.map', [])
 
 .controller('MapController', function($scope, $state, MapService, AuthService) {
-    var fbRef = new Firebase("https://where-to-next.firebaseio.com");
+    var fbRef = new Firebase("URL HERE");
 
     var authData = fbRef.getAuth();
     var map = MapService.initMap();

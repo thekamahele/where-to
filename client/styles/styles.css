@@ -1,6 +1,6 @@
 #mapdisplay {
   height: 485px;
-  width: 1000px;
+  width: 87%;
   margin: 0 auto;
   margin-top: 50px;
   border: 2px solid teal;
@@ -19,11 +19,9 @@ body {
 #login, #signup {
   border: 1px solid darkgray;
   border-radius: 10px;
-  width: 500px;
-  height: 300px;
-  margin-right: 80px;
-  margin-top: 100px;
-  float: right;
+  width: 100%;
+  padding-bottom: 45px;
+  padding-top: 45px;
 }
 
 .navbar-brand {
@@ -31,8 +29,14 @@ body {
 }
 
 img {
-  float: left;
-  margin-top: 150px;
-  margin-left: 80px;
-  width: 500px;
+  width: 520px;
+  margin-bottom: 10px;
+}
+
+.row {
+  margin-top: 10%;
+}
+
+.desc {
+  font-size: 1.3em;
 }

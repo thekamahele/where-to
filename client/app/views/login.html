@@ -4,13 +4,27 @@
         <button ui-sref="signup" class="btn btn-default navbar-right navbar-btn ">Sign Up</button>
     </div>
 </nav>
-
-<img src="./assets/worldmap.png" alt="">
-<div id='login' class='text-center'>
-    <h1>show me the map!</h1>
-    <form name="loginForm" class="form-signin" ng-submit='login()'>
-        <input type='text' ng-model='user.email' class="form-control" placeholder="wanderlust@whereto.com">
-        <input type="password" ng-model='user.password' class="form-control" placeholder="password">
-        <button class="btn btn-lg btn-primary btn-block">login</button>
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="./assets/worldmap.png" alt="">
+            <br>
+            <div class="text-center desc">
+                Are you a <b class="text-primary">nomadic spirit</b> aspiring to <i>travel the world</i>? 
+                <br>
+                <br>
+                <b class="text-primary">Where To</b> is a tool for you to visually keep track of places on your <b class="text-primary">travel bucket list</b>!
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id='login' class='text-center'>
+                <h1>show me the map!</h1>
+                <form name="loginForm" class="form-signin" ng-submit='login()'>
+                    <input type='text' ng-model='user.email' class="form-control" placeholder="wanderlust@whereto.com">
+                    <input type="password" ng-model='user.password' class="form-control" placeholder="password">
+                    <button class="btn btn-lg btn-primary btn-block">login</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
