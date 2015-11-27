@@ -1,0 +1,9 @@
+{
+  "firebase": "where-to-next",
+  "public": "client",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

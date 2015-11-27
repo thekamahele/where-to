@@ -1,4 +1,4 @@
-angular.module('where-to.services', [])
+angular.module('where-to.services', ['firebase'])
 .factory('MapService', function($http){
   var styles = [{
       "featureType": "water",
@@ -65,6 +65,63 @@ var initMap = function() {
 
   return {
     initMap: initMap
+  }
+
+})
+.factory('AuthService', function($state) {
+  var fbRef = new Firebase("https://where-to-next.firebaseio.com");
+
+  var checkAuth = new FirebaseSimpleLogin(fbRef, function(err, user) {
+      if (err !== null) {
+          console.log("Error authenticating:", err);
+      } else if (user !== null) {
+          console.log("User is logged in:", user);
+      } else {
+          console.log("User is logged out");
+      }
+  });
+  
+ fbRef.onAuth(function(authData) {
+      if (authData) {
+          $state.go('map')
+      } else {
+          console.log('User unauthenticated')
+      }
+  });
+
+  var login = function(email, password) {
+    checkAuth.login('password', {
+        email: email,
+        password: password
+    });
+  };
+
+  var logout = function() {
+    checkAuth.logout();
+  };
+
+  var signup = function(email, password) {
+    checkAuth.createUser(email, password, function(error, user) {
+        if (error === null) {
+            console.log("User created successfully:", user);
+            login(email, password);
+            //saving user info
+            fbRef.child(user.uid).set({
+                provider: user.provider,
+                name: user.email,
+                whereToList: []
+            });
+
+        } else {
+            console.log("Error creating user:", error);
+        }
+    });
+  }
+
+  return {
+    login: login,
+    signup: signup,
+    logout: logout
   }
 
 })
